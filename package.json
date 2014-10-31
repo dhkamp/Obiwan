@@ -1,19 +1,21 @@
 {
   "name": "Obiwan.js",
   "version": "0.0.0",
-  "description" : "Easily create CSS Animations and Transitions from Javascript",
-  "author":"dhoelkeskamp@gmail.com",
+  "description": "Easily create CSS Animations and Transitions from Javascript",
+  "author": "dhoelkeskamp@gmail.com",
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/DHkamp/Obiwan"
+    "type": "git",
+    "url": "https://github.com/DHkamp/Obiwan"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
-    "mocha": "^2.0.1"
+    "mocha": "^2.0.1",
+    "uglify-js": "^2.4.15"
   },
   "scripts": {
     "bundle": "browserify js/main.js -o build/obiwan.js",
-	"test": "mocha test/**.js"
+	"uglify": "uglifyjs build/obiwan.js -o build/obiwan.min.js -m",
+    "test": "mocha test/**.js"
   },
   "license": "Apache"
 }
