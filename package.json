@@ -9,13 +9,14 @@
   },
   "devDependencies": {
     "browserify": "^6.2.0",
+    "uglify-js": "^2.4.15",
     "mocha": "^2.0.1",
-    "uglify-js": "^2.4.15"
+    "chai": "^1.9.2"
   },
   "scripts": {
     "bundle": "browserify js/main.js -o build/obiwan.js",
     "uglify": "uglifyjs build/obiwan.js -o build/obiwan.min.js -m",
-    "test": "mocha test/**.js"
+    "test": "mocha test/*/*.js"
   },
   "license": "Apache"
 }
