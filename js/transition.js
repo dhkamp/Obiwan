@@ -55,4 +55,42 @@ module.exports = function () {
             return _this;
         }
     };
+
+    this.Duration = function(duration) {
+        if(arguments.length === 0) {
+            return dur;
+        } else {
+            if(typeof duration === 'string') {
+                dur = Gaps.Utilities.StringToMs(duration);
+            } else {
+                dur = duration + '';
+            }
+            append();
+            return _self;
+        }
+    };
+
+    this.Property = function(property) {
+        if(arguments.length === 0) {
+            return prop;
+        } else {
+            if (typeof property === 'string') {
+                prop = property;
+            } else {
+                prop = property.join(',').replace(' ', '') + '';
+            }
+            append();
+            return _self;
+        }
+    };
+
+    this.Type = function(type) {
+        if(arguments.length === 0) {
+            return type;
+        } else {
+            type = transType;
+            append();
+            return _self;
+        }
+    };
 };
