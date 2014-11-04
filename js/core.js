@@ -26,10 +26,14 @@ module.exports = (function () {
         }
     }
 
+    function replace(str) {
+    }
+
 	return {
         Utilities: {
             convertStringToMs: convertStringToMs,
-            ensureElement: ensureElement
+            ensureElement: ensureElement,
+            replace: replace
         }
 	};
 }());

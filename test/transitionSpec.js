@@ -44,20 +44,28 @@ describe('Transition', function() {
             expect(T.duration()).to.equal(3000);
         });
 
+        it('should throw an error on wrong parameters', function() {
+            expect(T.duration.bind(T, [400])).to.throw('Error at convertStringToMs() no valid parameter.');
+        });
+
     });
 
     describe('property()', function() {
 
         it('should get the transition property', function() {
-            expect(T.Property()).to.equal('all');
+            expect(T.property()).to.equal('all');
         });
 
         it('should set the transition property', function() {
-            T.Property('width');
-            expect(T.Property()).to.equal('width');
+            T.property('width');
+            expect(T.property()).to.equal('width');
 
-            T.Property(['width', 'height', 'background-color']);
-            expect(T.Property()).to.equal(['width', 'height', 'background-color']);
+            T.property(['width', 'height', 'background-color']);
+            expect(T.property()).to.eql(['width', 'height', 'background-color']);
+        });
+
+        it('should throw an error on wrong parameters', function() {
+            expect(T.property.bind(T, {width: true, height: true})).to.throw('Error at property() no valid parameter.');
         });
 
     });
@@ -65,12 +73,15 @@ describe('Transition', function() {
     describe('type()', function() {
 
         it('should get the transition type', function() {
-            expect(T.Property()).to.equal('ease');
+            expect(T.type()).to.equal('ease');
         });
 
         it('should set the transition type', function() {
             T.Type('linear');
             expect(T.Type()).to.equal('linear');
+        });
+
+        it('should throw an error on wrong parameters', function() {
         });
     });
 
@@ -100,8 +111,5 @@ describe('Transition', function() {
                 property: 'width'
             });
         });
-
     });
-
-
 });

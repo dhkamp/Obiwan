@@ -2,10 +2,10 @@ var Core = require('./core');
 
 module.exports = function () {
     var _this       = this,
-        duration    = '50ms',
+        duration    = 50,
         type        = 'ease',
-        delay       = '0ms',
-        property    = 'all';
+        delay       = 0,
+        cssprop     = 'all';
 
     this.config = function (cfg) {
         var i,
@@ -17,25 +17,25 @@ module.exports = function () {
                 duration    : duration,
                 type        : type,
                 delay       : delay,
-                property    : property
+                property    : cssprop
             };
         } else {
             for (prop in cfg) {
                 switch (prop.toLowerCase()) {
                 case 'duration':
                 case 'dur':
-                    //_self.Duration(cfg[property]);
+                    _this.duration(cfg[prop]);
                     break;
                 case 'type':
-                    //_self.Type(cfg[property]);
+                    _this.type(cfg[prop]);
                     break;
                 case 'delay':
                 case 'del':
-                    //_self.Delay(cfg[property]);
+                    _this.delay(cfg[prop]);
                     break;
                 case 'property':
                 case 'prop':
-                    //_self.Property(cfg[property]);
+                    _this.property(cfg[prop]);
                     break;
                 }
             }
@@ -47,49 +47,37 @@ module.exports = function () {
         if (arguments.length === 0) {
             return Core.Utilities.convertStringToMs(delay);
         } else {
-            if (typeof del === 'string') {
-                delay = Core.Utilities.convertStringToMs(del);
-            } else {
-                delay = del + '';
-            }
+            delay = Core.Utilities.convertStringToMs(del);
             return _this;
         }
     };
 
-    this.duration = function(dur) {
-        if(arguments.length === 0) {
+    this.duration = function (dur) {
+        if (arguments.length === 0) {
             return Core.Utilities.convertStringToMs(duration);
         } else {
-            if(typeof duration === 'string') {
-                duration = Gaps.Utilities.StringToMs(dur;
-            } else {
-                duration = dur + '';
-            }
+            duration = Core.Utilities.convertStringToMs(dur);
             return _this;
         }
     };
 
-    this.Property = function(property) {
-        if(arguments.length === 0) {
-            return prop;
+    this.property = function (prop) {
+        if (arguments.length === 0) {
+            return cssprop;
+        } else if (typeof prop === 'string' || prop instanceof Array) {
+            cssprop = prop;
+            return _this;
         } else {
-            if (typeof property === 'string') {
-                prop = property;
-            } else {
-                prop = property.join(',').replace(' ', '') + '';
-            }
-            append();
-            return _self;
+            throw new Error('Error at property() no valid parameter.');
         }
     };
 
-    this.Type = function(type) {
-        if(arguments.length === 0) {
+    this.type = function (transType) {
+        if (arguments.length === 0) {
             return type;
         } else {
             type = transType;
-            append();
-            return _self;
+            return _this;
         }
     };
 };
