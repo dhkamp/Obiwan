@@ -75,9 +75,11 @@ module.exports = function () {
     this.type = function (transType) {
         if (arguments.length === 0) {
             return type;
-        } else {
+        } else if (typeof transType === 'string') {
             type = transType;
             return _this;
+        } else {
+            throw new Error('Error ar type() no valid parameter.');
         }
     };
 };

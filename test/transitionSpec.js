@@ -25,6 +25,9 @@ describe('Transition', function() {
             expect(T.delay()).to.equal(7000);
         });
 
+        it('should throw an error on wrong parameters', function() {
+            expect(T.delay.bind(T, [400])).to.throw('Error at convertStringToMs() no valid parameter.');
+        });
     });
 
     describe('duration()', function() {
@@ -77,11 +80,12 @@ describe('Transition', function() {
         });
 
         it('should set the transition type', function() {
-            T.Type('linear');
-            expect(T.Type()).to.equal('linear');
+            T.type('linear');
+            expect(T.type()).to.equal('linear');
         });
 
         it('should throw an error on wrong parameters', function() {
+            expect(T.type.bind(T, {type: 'linear'})).to.throw('Error ar type() no valid parameter.');
         });
     });
 
@@ -89,9 +93,9 @@ describe('Transition', function() {
 
         it('should get the transition configuration', function() {
             expect(T.config()).to.eql({
-                delay: '0ms',
+                delay: 0,
                 type: 'ease',
-                duration: '50ms',
+                duration: 50,
                 property: 'all'
             });
         });
@@ -105,9 +109,9 @@ describe('Transition', function() {
             });
 
             expect(T.config()).to.eql({
-                delay   : '10ms',
+                delay   : 10,
                 type    : 'linear',
-                duration: '1000',
+                duration: 1000,
                 property: 'width'
             });
         });
