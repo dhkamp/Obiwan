@@ -16,7 +16,7 @@
   "scripts": {
     "bundle": "browserify js/main.js -o build/obiwan.js",
     "uglify": "uglifyjs build/obiwan.js -o build/obiwan.min.js -m",
-    "test": "mocha test/*/*.js"
+    "test": "mocha test/*.js"
   },
   "license": "Apache"
 }

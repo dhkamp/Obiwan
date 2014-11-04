@@ -43,9 +43,9 @@ module.exports = function () {
         }
     };
 
-    this.Delay = function (del) {
+    this.delay = function (del) {
         if (arguments.length === 0) {
-            return delay;
+            return Core.Utilities.convertStringToMs(delay);
         } else {
             if (typeof del === 'string') {
                 delay = Core.Utilities.convertStringToMs(del);
