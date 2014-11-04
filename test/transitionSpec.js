@@ -115,5 +115,13 @@ describe('Transition', function() {
                 property: 'width'
             });
         });
+
+    });
+
+    describe('appendTo()', function() {
+
+        it('should append the transition to the provided element', function() {
+
+        });
     });
 });

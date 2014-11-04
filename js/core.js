@@ -26,9 +26,6 @@ module.exports = (function () {
         }
     }
 
-    function replace(str) {
-    }
-
 	return {
         Utilities: {
             convertStringToMs: convertStringToMs,

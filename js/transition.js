@@ -7,6 +7,16 @@ module.exports = function () {
         delay       = 0,
         cssprop     = 'all';
 
+    function bindTransition(elm) {
+        var style = '';
+
+        elm.style.webkitTransition  = style;
+        elm.style.MozTransition     = style;
+        elm.style.msTransition      = style;
+        elm.style.OTransition       = style;
+        elm.style.transition        = style;
+    }
+
     this.config = function (cfg) {
         var i,
             j,
@@ -80,6 +90,15 @@ module.exports = function () {
             return _this;
         } else {
             throw new Error('Error ar type() no valid parameter.');
+        }
+    };
+
+    this.appendTo = function(elm, fn) {
+        var element = Core.Utilities.ensureElement(elm);
+
+        if(element instanceof HTMLCollection) {
+
+        } else {
         }
     };
 };
