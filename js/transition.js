@@ -7,7 +7,7 @@ module.exports = function () {
         delay       = '0ms',
         property    = 'all';
 
-    this.Config = function (cfg) {
+    this.config = function (cfg) {
         var i,
             j,
             prop;
@@ -56,17 +56,16 @@ module.exports = function () {
         }
     };
 
-    this.Duration = function(duration) {
+    this.duration = function(dur) {
         if(arguments.length === 0) {
-            return dur;
+            return Core.Utilities.convertStringToMs(duration);
         } else {
             if(typeof duration === 'string') {
-                dur = Gaps.Utilities.StringToMs(duration);
+                duration = Gaps.Utilities.StringToMs(dur;
             } else {
-                dur = duration + '';
+                duration = dur + '';
             }
-            append();
-            return _self;
+            return _this;
         }
     };
 

@@ -8,35 +8,6 @@ describe('Transition', function() {
         T = new Transition();
     });
 
-    describe('config()', function(){
-
-        it('should get the transition configuration', function() {
-            expect(T.Config()).to.eql({
-                delay: '0ms',
-                type: 'ease',
-                duration: '50ms',
-                property: 'all'
-            });
-        });
-
-        it('should set the transition configuration', function() {
-            T.Config({
-                property: 'width',
-                delay   : '10ms',
-                type    : 'linear',
-                duration: '1000'
-            });
-
-            expect(T.Config()).to.eql({
-                delay   : '10ms',
-                type    : 'linear',
-                duration: '1000',
-                property: 'width'
-            });
-        });
-
-    });
-
     describe('delay()', function(){
 
         it('should get the transition delay', function() {
@@ -59,18 +30,18 @@ describe('Transition', function() {
     describe('duration()', function() {
 
         it('should get the transition duration', function() {
-            expect(T.Duration()).to.equal(50);
+            expect(T.duration()).to.equal(50);
         });
 
         it('should set the transition duration', function() {
-            T.Duration('100ms');
-            expect(T.Duration()).to.equal(100);
+            T.duration('100ms');
+            expect(T.duration()).to.equal(100);
 
-            T.Duration('250');
-            expect(T.Duration()).to.equal(250);
+            T.duration('250');
+            expect(T.duration()).to.equal(250);
 
-            T.Duration('3s');
-            expect(T.Duration()).to.equal(3000);
+            T.duration('3s');
+            expect(T.duration()).to.equal(3000);
         });
 
     });
@@ -102,4 +73,35 @@ describe('Transition', function() {
             expect(T.Type()).to.equal('linear');
         });
     });
+
+    describe('config()', function(){
+
+        it('should get the transition configuration', function() {
+            expect(T.config()).to.eql({
+                delay: '0ms',
+                type: 'ease',
+                duration: '50ms',
+                property: 'all'
+            });
+        });
+
+        it('should set the transition configuration', function() {
+            T.config({
+                property: 'width',
+                delay   : '10ms',
+                type    : 'linear',
+                duration: '1000'
+            });
+
+            expect(T.config()).to.eql({
+                delay   : '10ms',
+                type    : 'linear',
+                duration: '1000',
+                property: 'width'
+            });
+        });
+
+    });
+
+
 });
