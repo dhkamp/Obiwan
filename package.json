@@ -1,7 +1,7 @@
 {
   "name": "Obiwan.js",
   "version": "0.0.0",
-  "description": "Easily create CSS Animations and Transitions from Javascript",
+  "description": "Javascript animation and transition manager",
   "author": "dhoelkeskamp@gmail.com",
   "repository": {
     "type": "git",
@@ -11,11 +11,12 @@
     "browserify": "^6.2.0",
     "uglify-js": "^2.4.15",
     "mocha": "^2.0.1",
-    "chai": "^1.9.2"
+    "chai": "^1.9.2",
+    "watch": "^0.13.0"
   },
   "scripts": {
-    "bundle": "browserify js/main.js -o build/obiwan.js",
-    "uglify": "uglifyjs build/obiwan.js -o build/obiwan.min.js -m",
+    "build": "browserify js/main.js -o build/obiwan.js && uglifyjs build/obiwan.js -o build/obiwan.min.js -m",
+    "watch": "watch \"npm run test\" ./js",
     "test": "mocha test/*.js"
   },
   "license": "Apache"
