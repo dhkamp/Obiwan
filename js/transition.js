@@ -8,7 +8,19 @@ module.exports = function () {
         cssprop     = 'all';
 
     function bindTransition(elm) {
-        var style = '';
+        var i, j,
+            style = '';
+
+        if(cssprop instanceof Array) {
+            for(i = 0, j = cssprop.length; i < j; i++) {
+                style += cssprop[i] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+                if(i < (j - 1)) {
+                    style += ',';
+                }
+            }
+        } else {
+            style = cssprop + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+        }
 
         elm.style.webkitTransition  = style;
         elm.style.MozTransition     = style;
@@ -93,12 +105,16 @@ module.exports = function () {
         }
     };
 
-    this.appendTo = function(elm, fn) {
-        var element = Core.Utilities.ensureElement(elm);
+    this.appendTo = function(elm) {
+        var i, j,
+            element = Core.Utilities.ensureElement(elm);
 
         if(element instanceof HTMLCollection) {
-
+            for (i = 0, j = element.length; i < j; i++) {
+                bindTransition(element[i]);
+            }
         } else {
+            bindTransition(element);
         }
     };
 };

@@ -28,6 +28,7 @@ describe('Transition', function() {
         it('should throw an error on wrong parameters', function() {
             expect(T.delay.bind(T, [400])).to.throw('Error at convertStringToMs() no valid parameter.');
         });
+
     });
 
     describe('duration()', function() {
@@ -87,6 +88,7 @@ describe('Transition', function() {
         it('should throw an error on wrong parameters', function() {
             expect(T.type.bind(T, {type: 'linear'})).to.throw('Error ar type() no valid parameter.');
         });
+
     });
 
     describe('config()', function(){
@@ -123,5 +125,6 @@ describe('Transition', function() {
         it('should append the transition to the provided element', function() {
 
         });
+
     });
 });

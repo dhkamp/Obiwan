@@ -29,8 +29,7 @@ module.exports = (function () {
 	return {
         Utilities: {
             convertStringToMs: convertStringToMs,
-            ensureElement: ensureElement,
-            replace: replace
+            ensureElement: ensureElement
         }
 	};
 }());

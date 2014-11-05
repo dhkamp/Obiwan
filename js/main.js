@@ -1,3 +1,3 @@
-var Transition = require('./transition');
-
-var ttest = 'one';
+window.Obiwan = window.Obiwan || {
+    Transition: require('./transition')
+};

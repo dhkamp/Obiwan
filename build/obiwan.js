@@ -36,21 +36,42 @@ module.exports = (function () {
 }());
 
 },{}],2:[function(require,module,exports){
-var Transition = require('./transition');
-
-var ttest = 'one';
-
+window.Obiwan = window.Obiwan || {
+    Transition: require('./transition')
+};
 },{"./transition":3}],3:[function(require,module,exports){
 var Core = require('./core');
 
 module.exports = function () {
     var _this       = this,
-        duration    = '50ms',
+        duration    = 50,
         type        = 'ease',
-        delay       = '0ms',
-        property    = 'all';
+        delay       = 0,
+        cssprop     = 'all';
 
-    this.Config = function (cfg) {
+    function bindTransition(elm) {
+        var i, j,
+            style = '';
+
+        if(cssprop instanceof Array) {
+            for(i = 0, j = cssprop.length; i < j; i++) {
+                style += cssprop[i] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+                if(i < (j - 1)) {
+                    style += ',';
+                }
+            }
+        } else {
+            style = cssprop + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+        }
+
+        elm.style.webkitTransition  = style;
+        elm.style.MozTransition     = style;
+        elm.style.msTransition      = style;
+        elm.style.OTransition       = style;
+        elm.style.transition        = style;
+    }
+
+    this.config = function (cfg) {
         var i,
             j,
             prop;
@@ -60,25 +81,25 @@ module.exports = function () {
                 duration    : duration,
                 type        : type,
                 delay       : delay,
-                property    : property
+                property    : cssprop
             };
         } else {
             for (prop in cfg) {
                 switch (prop.toLowerCase()) {
                 case 'duration':
                 case 'dur':
-                    //_self.Duration(cfg[property]);
+                    _this.duration(cfg[prop]);
                     break;
                 case 'type':
-                    //_self.Type(cfg[property]);
+                    _this.type(cfg[prop]);
                     break;
                 case 'delay':
                 case 'del':
-                    //_self.Delay(cfg[property]);
+                    _this.delay(cfg[prop]);
                     break;
                 case 'property':
                 case 'prop':
-                    //_self.Property(cfg[property]);
+                    _this.property(cfg[prop]);
                     break;
                 }
             }
@@ -90,52 +111,53 @@ module.exports = function () {
         if (arguments.length === 0) {
             return Core.Utilities.convertStringToMs(delay);
         } else {
-            if (typeof del === 'string') {
-                delay = Core.Utilities.convertStringToMs(del);
-            } else {
-                delay = del + '';
-            }
+            delay = Core.Utilities.convertStringToMs(del);
             return _this;
         }
     };
 
-    this.Duration = function(duration) {
-        if(arguments.length === 0) {
-            return dur;
+    this.duration = function (dur) {
+        if (arguments.length === 0) {
+            return Core.Utilities.convertStringToMs(duration);
         } else {
-            if(typeof duration === 'string') {
-                dur = Gaps.Utilities.StringToMs(duration);
-            } else {
-                dur = duration + '';
-            }
-            append();
-            return _self;
+            duration = Core.Utilities.convertStringToMs(dur);
+            return _this;
         }
     };
 
-    this.Property = function(property) {
-        if(arguments.length === 0) {
-            return prop;
+    this.property = function (prop) {
+        if (arguments.length === 0) {
+            return cssprop;
+        } else if (typeof prop === 'string' || prop instanceof Array) {
+            cssprop = prop;
+            return _this;
         } else {
-            if (typeof property === 'string') {
-                prop = property;
-            } else {
-                prop = property.join(',').replace(' ', '') + '';
-            }
-            append();
-            return _self;
+            throw new Error('Error at property() no valid parameter.');
         }
     };
 
-    this.Type = function(type) {
-        if(arguments.length === 0) {
+    this.type = function (transType) {
+        if (arguments.length === 0) {
             return type;
-        } else {
+        } else if (typeof transType === 'string') {
             type = transType;
-            append();
-            return _self;
+            return _this;
+        } else {
+            throw new Error('Error ar type() no valid parameter.');
+        }
+    };
+
+    this.appendTo = function(elm) {
+        var i, j,
+            element = Core.Utilities.ensureElement(elm);
+
+        if(element instanceof HTMLCollection) {
+            for (i = 0, j = element.length; i < j; i++) {
+                bindTransition(element[i]);
+            }
+        } else {
+            bindTransition(element);
         }
     };
 };
-
 },{"./core":1}]},{},[2]);
