@@ -59,6 +59,9 @@ module.exports = function () {
                 case 'prop':
                     _this.property(cfg[prop]);
                     break;
+                case 'appendTo':
+                    _this.appendTo(cfg[prop]);
+                    break;
                 }
             }
             return _this;
