@@ -9,24 +9,54 @@ module.exports = function () {
 
     function bindTransition(elm) {
         var i, j,
-            style = '';
+            style   = '',
+            has     = hasTransition(elm);
 
         if(cssprop instanceof Array) {
             for(i = 0, j = cssprop.length; i < j; i++) {
-                style += cssprop[i] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+                style += getTransitionCSS(i);
                 if(i < (j - 1)) {
                     style += ',';
                 }
             }
         } else {
-            style = cssprop + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+            style += getTransitionCSS();
         }
 
-        elm.style.webkitTransition  = style;
-        elm.style.MozTransition     = style;
-        elm.style.msTransition      = style;
-        elm.style.OTransition       = style;
-        elm.style.transition        = style;
+        if(has) {
+            setTransitionCSS(elm, style, true);
+        } else {
+            setTransitionCSS(elm, style, false);
+        }
+    }
+
+    function setTransitionCSS(elm, style, append) {
+        if(append) {
+            elm.style.transition += ',' + style;
+        } else {
+            elm.style.transition = style;
+        }
+
+        elm.style.webkitTransition  = elm.style.transition;
+        elm.style.MozTransition     = elm.style.transition;
+        elm.style.msTransition      = elm.style.transition;
+        elm.style.OTransition       = elm.style.transition;
+    }
+
+    function getTransitionCSS(index) {
+        if(index !== undefined) {
+            return cssprop[index] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+        } else {
+            return cssprop + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
+        }
+    }
+
+    function hasTransition(elm) {
+        return !!elm.style.webkitTransition   ||
+                !!elm.style.MozTransition     ||
+                !!elm.style.msTransition      ||
+                !!elm.style.OTransition       ||
+                !!elm.style.transition
     }
 
     this.config = function (cfg) {

@@ -26,6 +26,9 @@
                property : ['width', 'background-color'],
            });
            T.appendTo('.demo');
+
+           var Tb = new Obiwan.Transition();
+           Tb.delay(50).duration(1000).property('color').type('linear').appendTo('.demo');
        </script>
     </body>
 </html>

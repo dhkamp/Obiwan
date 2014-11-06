@@ -1,10 +1,8 @@
 Obiwan.js
 =========
 
-Obiwan is an Animation- and Transition-Manager written in Javascript that makes creating CSS3-Transitions as easy as possible.
-Write less CSS and create your Animations and Transitions directly on runtime.
-
-*Note: Currently only transitions are supported*
+Obiwan is a Transition-Manager written in Javascript that makes creating CSS3-Transitions as easy as possible.
+Write less CSS and create your Transitions on runtime.
 
 ##API
 
@@ -72,7 +70,7 @@ If no parameters are provided it'll return the currently set value.
 ```javascript
 myTransition.type() //returns the transition type, default is 'ease'
 ```
-####.appendTo()
+####.appendTo
 The appendTo function appends the transition to the provided element/s. You can pass in an element, a string starting with # for selecting a single element or a string starting with . for multiple elements. Selection goes per getElementById oder getElementsByClassName
 
 ```javascript
