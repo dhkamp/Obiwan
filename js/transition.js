@@ -123,7 +123,7 @@ module.exports = function () {
             cssprop = prop;
             return _this;
         } else {
-            throw new Error('Error at property() no valid parameter.');
+            throw new Error(Core.Utilities.replace(Core.Constants.Error, 'property()'));
         }
     };
 
@@ -134,7 +134,7 @@ module.exports = function () {
             type = transType;
             return _this;
         } else {
-            throw new Error('Error ar type() no valid parameter.');
+            throw new Error(Core.Utilities.replace(Core.Constants.Error, 'type()'));
         }
     };
 

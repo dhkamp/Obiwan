@@ -86,7 +86,7 @@ describe('Transition', function() {
         });
 
         it('should throw an error on wrong parameters', function() {
-            expect(T.type.bind(T, {type: 'linear'})).to.throw('Error ar type() no valid parameter.');
+            expect(T.type.bind(T, {type: 'linear'})).to.throw('Error at type() no valid parameter.');
         });
 
     });

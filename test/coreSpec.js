@@ -12,14 +12,10 @@ describe('Core.Utilities', function () {
         });
     });
 
-    describe('ensureElement()', function() {
-        it('should get an element by id if the first argument is a string starting with #', function() {
-        });
-
-        it('should get a list of elements (element by class) if the first argument is a string starting with .', function() {
-        });
-
-        it('should do nothing if the first argument is an element', function() {
+    describe('replace()', function() {
+        it('should replace the placeholders in a string with provided strings', function() {
+            expect(Core.Utilities.replace('This is a {0}string', 'Test')).to.equal('This is a Teststring');
+            expect(Core.Utilities.replace('This {0} a Test{1}', 'is', 'string')).to.equal('This is a Teststring');
         });
     });
 });

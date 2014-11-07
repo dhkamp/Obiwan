@@ -26,10 +26,25 @@ module.exports = (function () {
         }
     }
 
+    function replace() {
+        var i, j,
+            target = arguments[0];
+        if(typeof target === 'string') {
+            for(i = 1, j = arguments.length; i < j; i++) {
+                target = target.replace('{' + (i - 1) + '}', arguments[i]);
+            }
+        }
+        return target;
+    }
+
 	return {
         Utilities: {
             convertStringToMs: convertStringToMs,
-            ensureElement: ensureElement
+            ensureElement: ensureElement,
+            replace: replace
+        },
+        Constants: {
+            Error: 'Error at {0} no valid parameter.'
         }
 	};
 }());
