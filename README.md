@@ -12,7 +12,7 @@ Write less CSS and create your Transitions on runtime.
 Creating a new `Transition` is the first step for using the Obiwan-Transitionmanager.
 
 ```javascript
-var myTransition = new Obiwan.Transition()
+var myTransition = new Obiwan.Transition();
 ```
 
 ### Functions
@@ -22,15 +22,15 @@ var myTransition = new Obiwan.Transition()
 The `delay`-function sets the delay for the created transition. It accepts a string or a number as value. Strings will be converted to milliseconds if possible.
 
 ```javascript
-myTransition.delay(10)     // 10 milliseconds
-myTransition.delay('50ms') // 50 milliseconds
-myTransition.delay('2s')   // 2000 milliseconds
+myTransition.delay(10);     // 10 milliseconds
+myTransition.delay('50ms'); // 50 milliseconds
+myTransition.delay('2s');   // 2000 milliseconds
 ```
 
 If you call this function without parameters it returns the currently set value for the transition delay.
 
 ```javascript
-myTransition.delay() // returns Transition delay as number (milliseconds), default is 0  
+myTransition.delay(); // returns Transition delay as number (milliseconds), default is 0  
 ```
 
 #### .duration
@@ -38,15 +38,15 @@ myTransition.delay() // returns Transition delay as number (milliseconds), defau
 The `duration`-function sets the transition-duration. Like the `delay`-function it takes either a string or a number as parameter.
 
 ```javascript
-myTransition.duration(10)     // 10 milliseconds
-myTransition.duration('50ms') // 50 milliseconds
-myTransition.duration('2s')   // 2000 milliseconds
+myTransition.duration(10);     // 10 milliseconds
+myTransition.duration('50ms'); // 50 milliseconds
+myTransition.duration('2s');   // 2000 milliseconds
 ```
 
 If you call this function without parameters it returns the currently set value for the transition duration.
 
 ```javascript
-myTransition.duration() // returns Transition delay as number (milliseconds), default is 50  
+myTransition.duration(); // returns Transition delay as number (milliseconds), default is 50  
 ```
 
 #### .property
@@ -61,7 +61,7 @@ myTransition.property(['width','background-color']);
 If no parameters get passed in the function returns the currently set transition property.
 
 ```javascript
-myTransition.property() // returns the property/ies, default is 'all'
+myTransition.property(); // returns the property/ies, default is 'all'
 ```
 
 #### .type
@@ -69,13 +69,13 @@ myTransition.property() // returns the property/ies, default is 'all'
 The `type`-function configures the animation type, e.g: linear, ease, ease-in etc.
 
 ```javascript
-myTransition.type('linear') // sets animation type to linear
+myTransition.type('linear'); // sets animation type to linear
 ```
 
 If no parameters are provided it returns the currently set value.
 
 ```javascript
-myTransition.type() // returns the transition type, default is 'ease'
+myTransition.type(); // returns the transition type, default is 'ease'
 ```
 #### .appendTo
 

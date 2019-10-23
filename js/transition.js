@@ -1,6 +1,6 @@
 import Core from "./core";
 
-class Transition {
+export default class Transition {
 
     constructor() {
 
@@ -153,7 +153,7 @@ class Transition {
         else if (typeof prop === 'string' || prop instanceof Array) {
 
             this.transitionProperties.cssProp = prop;
-            return transitionProperties.cssProp;
+            return this.transitionProperties.cssProp;
         }
         else {
 
@@ -196,5 +196,3 @@ class Transition {
         }
     }
 }
-
-export let transition = new Transition();
