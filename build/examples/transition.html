@@ -2,10 +2,18 @@
 <html>
     <head>
         <style>
-            .demo{
+            .demo,
+            .demo2 {
                 width: 250px;
                 height: 250px;
                 background-color: yellow;
+            }
+            .demo:hover {
+                width: 350px;
+                background-color: red;
+            }
+            .demo2:hover {
+                background-color: green;
             }
         </style>
     </head>
@@ -14,21 +22,25 @@
         <div class="demo">
         </div>
 
-        <div class="demo" style="margin-top: 50px">
+        <div class="demo2" style="margin-top: 50px">
         </div>
 
-       <script src="../obiwan.js"></script>
-       <script>
-           var T = new Obiwan.Transition();
-           T.config({
-               duration : 500,
-               delay    : 25,
-               property : ['width', 'background-color'],
-           });
-           T.appendTo('.demo');
+        <script src="../obiwan.js"></script>
+        <script>
+            var T = new Obiwan.Transition();
+            T.config({
+                duration : 500,
+                delay    : 25,
+                property : ['width', 'background-color'],
+            });
+            T.appendTo('.demo');
 
-           var Tb = new Obiwan.Transition();
-           Tb.delay(50).duration(1000).property('color').type('linear').appendTo('.demo');
-       </script>
+            var Tb = new Obiwan.Transition()
+                .delay(50)
+                .duration(1000)
+                .property('background-color')
+                .type('linear')
+                .appendTo('.demo2');
+        </script>
     </body>
 </html>

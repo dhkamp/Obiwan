@@ -1,153 +1,200 @@
-var Core = require('./core');
+import Core from "./core";
 
-module.exports = function () {
-    var _this       = this,
-        duration    = 50,
-        type        = 'ease',
-        delay       = 0,
-        cssprop     = 'all';
+class Transition {
 
-    function bindTransition(elm) {
-        var i, j,
-            style   = '',
-            has     = hasTransition(elm);
+    constructor() {
 
-        if(cssprop instanceof Array) {
-            for(i = 0, j = cssprop.length; i < j; i++) {
-                style += getTransitionCSS(i);
-                if(i < (j - 1)) {
+        this.transitionProperties = {
+            duration : 50,
+            type     : "ease",
+            delay    : 0,
+            cssProp  : "all"
+        }
+    }
+
+    _bindTransition(elm) {
+
+        let i, ii,
+            style = '';
+        const hasTransition = _hasTransition(elm);
+
+        if (this.transitionProperties.cssProp instanceof Array) {
+
+            for (i = 0, ii = this.transitionProperties.cssProp.length; i < ii; i++) {
+
+                style += _getTransitionCSS(i);
+
+                if (i < (ii - 1)) {
+
                     style += ',';
                 }
             }
-        } else {
-            style += getTransitionCSS();
+        }
+        else {
+
+            style += _getTransitionCSS();
         }
 
-        if(has) {
-            setTransitionCSS(elm, style, true);
-        } else {
-            setTransitionCSS(elm, style, false);
+        if (hasTransition) {
+
+            _setTransitionCSS(elm, style, true);
+        }
+        else {
+
+            _setTransitionCSS(elm, style, false);
         }
     }
 
-    function setTransitionCSS(elm, style, append) {
-        if(append) {
+    _setTransitionCSS(elm, style, append) {
+
+        if (append) {
+
             elm.style.transition += ',' + style;
-        } else {
+        }
+        else {
+
             elm.style.transition = style;
         }
 
-        elm.style.webkitTransition  = elm.style.transition;
-        elm.style.MozTransition     = elm.style.transition;
-        elm.style.msTransition      = elm.style.transition;
-        elm.style.OTransition       = elm.style.transition;
+        elm.style.webkitTransition = elm.style.transition;
+        elm.style.MozTransition    = elm.style.transition;
+        elm.style.msTransition     = elm.style.transition;
+        elm.style.OTransition      = elm.style.transition;
     }
 
-    function getTransitionCSS(index) {
-        if(index !== undefined) {
-            return cssprop[index] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
-        } else {
-            return cssprop + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
-        }
+    _getTransitionCSS(index) {
+
+        let cssProp  = this.transitionProperties.cssProp,
+            duration = this.transitionProperties.duration,
+            type     = this.transitionProperties.type,
+            delay    = this.transitionProperties.delay;
+
+        return index !== undefined
+            ? cssProp[index] + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms'
+            : cssProp + ' ' + duration + 'ms ' + type + ' ' + delay + 'ms';
     }
 
-    function hasTransition(elm) {
-        return !!elm.style.webkitTransition   ||
-                !!elm.style.MozTransition     ||
-                !!elm.style.msTransition      ||
-                !!elm.style.OTransition       ||
-                !!elm.style.transition
+    _hasTransition(elm) {
+        return !!elm.style.webkitTransition
+            || !!elm.style.MozTransition
+            || !!elm.style.msTransition
+            || !!elm.style.OTransition
+            || !!elm.style.transition;
     }
 
-    this.config = function (cfg) {
-        var i,
-            j,
-            prop;
+    config(cfg) {
+
+        let prop;
 
         if (arguments.length === 0) {
-            return {
-                duration    : duration,
-                type        : type,
-                delay       : delay,
-                property    : cssprop
-            };
-        } else {
-            for (prop in cfg) {
-                switch (prop.toLowerCase()) {
+
+            return this.transitionProperties;
+        }
+
+        for (prop in cfg) {
+
+            switch (prop.toLowerCase()) {
                 case 'duration':
                 case 'dur':
-                    _this.duration(cfg[prop]);
+                    duration(cfg[prop]);
                     break;
                 case 'type':
-                    _this.type(cfg[prop]);
+                    type(cfg[prop]);
                     break;
                 case 'delay':
                 case 'del':
-                    _this.delay(cfg[prop]);
+                    delay(cfg[prop]);
                     break;
                 case 'property':
                 case 'prop':
-                    _this.property(cfg[prop]);
+                    property(cfg[prop]);
                     break;
                 case 'appendTo':
-                    _this.appendTo(cfg[prop]);
+                    appendTo(cfg[prop]);
                     break;
-                }
             }
-            return _this;
         }
-    };
 
-    this.delay = function (del) {
+        return this.transitionProperties;
+    }
+
+    delay(del) {
+
         if (arguments.length === 0) {
-            return Core.Utilities.convertStringToMs(delay);
-        } else {
-            delay = Core.Utilities.convertStringToMs(del);
-            return _this;
+
+            return Core.Utilities.convertStringToMs(this.transitionProperties.delay);
         }
-    };
+        else {
 
-    this.duration = function (dur) {
-        if (arguments.length === 0) {
-            return Core.Utilities.convertStringToMs(duration);
-        } else {
-            duration = Core.Utilities.convertStringToMs(dur);
-            return _this;
+            this.transitionProperties.delay = Core.Utilities.convertStringToMs(del);
+            return this.transitionProperties.delay;
         }
-    };
+    }
 
-    this.property = function (prop) {
+    duration(dur) {
+
         if (arguments.length === 0) {
-            return cssprop;
-        } else if (typeof prop === 'string' || prop instanceof Array) {
-            cssprop = prop;
-            return _this;
-        } else {
+
+            return Core.Utilities.convertStringToMs(this.transitionProperties.duration);
+        }
+        else {
+
+            this.transitionProperties.duration = Core.Utilities.convertStringToMs(dur);
+            return this.transitionProperties.duration;
+        }
+    }
+
+    property(prop) {
+
+        if (arguments.length === 0) {
+
+            return this.transitionProperties.cssProp;
+        }
+        else if (typeof prop === 'string' || prop instanceof Array) {
+
+            this.transitionProperties.cssProp = prop;
+            return transitionProperties.cssProp;
+        }
+        else {
+
             throw new Error(Core.Utilities.replace(Core.Constants.Error, 'property()'));
         }
-    };
+    }
 
-    this.type = function (transType) {
+    type(transType) {
+
         if (arguments.length === 0) {
-            return type;
-        } else if (typeof transType === 'string') {
-            type = transType;
-            return _this;
-        } else {
+
+            return this.transitionProperties.type;
+        }
+        else if (typeof transType === 'string') {
+
+            this.transitionProperties.type = transType;
+            return this.transitionProperties.type;
+        }
+        else {
+
             throw new Error(Core.Utilities.replace(Core.Constants.Error, 'type()'));
         }
-    };
+    }
 
-    this.appendTo = function(elm) {
-        var i, j,
+    appendTo(elm) {
+
+        let i, ii,
             element = Core.Utilities.ensureElement(elm);
 
-        if(element instanceof HTMLCollection) {
-            for (i = 0, j = element.length; i < j; i++) {
-                bindTransition(element[i]);
+        if (element instanceof HTMLCollection) {
+
+            for (i = 0, ii = element.length; i < ii; i++) {
+
+                _bindTransition(element[i]);
             }
-        } else {
-            bindTransition(element);
         }
-    };
-};
+        else {
+
+            _bindTransition(element);
+        }
+    }
+}
+
+export let transition = new Transition();

@@ -1,1 +1,1 @@
-var Core = require('./core');
+import Core from "./core";
